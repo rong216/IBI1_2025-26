@@ -1,0 +1,1 @@
+What went well: Git init/commit/add commands are easy to understand. Challenging part: Resolving merge conflicts. Question: How to delete a useless branch?

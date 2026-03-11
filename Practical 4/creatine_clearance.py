@@ -1,47 +1,54 @@
-# 伪代码：肌酐清除率（CrCl）计算器
-# 1. 定义输入变量：年龄(age)、体重(weight)、性别(gender)、肌酐浓度(Cr)
-# 2. 输入合法性校验规则：
-#    - 年龄 < 100岁
-#    - 体重 20kg < weight < 80kg
-#    - 肌酐浓度 0 < Cr < 100 μmol/l
-#    - 性别只能是male/female（小写，统一格式）
-# 3. 校验逻辑：逐个判断变量是否符合规则，若有非法变量，打印错误提示（说明哪个变量需修正）
-# 4. 若所有输入合法，根据性别计算CrCl
-# 5. 输出最终的CrCl结果
+# Pseudocode: Creatinine Clearance (CrCl) Calculator
+# 1. Define input variables: age, weight (kg), gender, creatinine concentration (Cr, μmol/l)
+# 2. Input validity check rules:
+#    - Age < 100 years old
+#    - Weight: 20kg < weight < 80kg
+#    - Creatinine concentration: 0 < Cr < 100 μmol/l
+#    - Gender: only "male" or "female" (lowercase)
+# 3. Validation logic: Check each variable against rules one by one, 
+#    print error message if any variable is invalid (specify which one needs correction)
+# 4. If all inputs are valid, calculate CrCl based on gender
+# 5. Output the final CrCl result
 
-# 实际代码：定义测试变量（可自行修改数值测试合法/非法情况）
-age = 50
-weight = 60
-gender = "female"  # 仅支持male/female，小写
-Cr = 80  # 肌酐浓度，μmol/l
+# Actual code: Define test variables (modify values to test valid/invalid scenarios)
+try:
+    age = int(input("Please enter age (years): "))
+    weight = float(input("Please enter weight (kg): "))
+    Cr = float(input("Please enter creatinine concentration (μmol/l): "))
+except ValueError:
+    print("Error: Age/weight/Cr must be numeric values!")
+    exit()
 
-# 初始化错误标记
+# Get gender input
+gender = input("Please enter gender (male/female): ").lower()  # Convert to lowercase automatically
+
+# Initialize error flag
 is_invalid = False
-error_msg = "需修正的变量："
+error_msg = "Variables to correct: "
 
-# 合法性校验
+# Validity check
 if age >= 100:
     is_invalid = True
-    error_msg += "年龄（需<100)、"
+    error_msg += "age (must be < 100), "
 if weight <= 20 or weight >= 80:
     is_invalid = True
-    error_msg += "体重(需20<体重<80)、"
+    error_msg += "weight (must be 20 < weight < 80), "
 if Cr <= 0 or Cr >= 100:
     is_invalid = True
-    error_msg += "肌酐浓度(需0<Cr<100)、"
+    error_msg += "creatinine concentration (must be 0 < Cr < 100), "
 if gender not in ["male", "female"]:
     is_invalid = True
-    error_msg += "性别(仅支持male/female)、"
+    error_msg += "gender (only 'male' or 'female' allowed), "
 
-# 处理错误信息，去除末尾的顿号
 if is_invalid:
-    error_msg = error_msg[:-1]
+    # Remove the last comma and space
+    error_msg = error_msg[:-2]
     print(error_msg)
 else:
-    # 输入合法，计算CrCl
+    # Calculate CrCl using Cockcroft-Gault formula
     if gender == "female":
         crcl = ((140 - age) * weight) / (72 * Cr) * 0.85
     else:
         crcl = ((140 - age) * weight) / (72 * Cr)
-    # 打印结果，保留2位小数更符合临床规范
-    print(f"肌酐清除率(CrCl):{crcl:.2f} ml/min")
+    # Output result with 2 decimal places
+    print(f"Creatinine Clearance (CrCl): {crcl:.2f} ml/min")

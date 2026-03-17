@@ -41,7 +41,6 @@ print("-" * 30)
 
 # Step 3: Plot population change bar chart  
 import os  # New import
-import matplotlib.pyplot as plt
 
 # Extract sorted x-axis (countries) and y-axis (percentage change)
 sorted_countries = [x[0] for x in sorted_pop_change]

@@ -1,71 +1,70 @@
 import matplotlib.pyplot as plt
-# Step 1: Define population data and calculate percentage change 
-# Population dictionary: key = country, value = (population 2020, population 2024) Unit: millions
+
+# Step 1: define population data
 population = {
-    'UK': (66.7, 69.2),
-    'China': (1426, 1410),
-    'Italy': (59.4, 58.9),
-    'Brazil': (208.6, 212.0),
-    'USA': (331.6, 340.1)
+    "UK": (66.7, 69.2),
+    "China": (1426, 1410),
+    "Italy": (59.4, 58.9),
+    "Brazil": (208.6, 212.0),
+    "USA": (331.6, 340.1)
 }
 
-# Initialize dictionary to store percentage changes
+# Step 2: calculate percentage change
 pop_change = {}
-# Iterate and calculate percentage change for each country (rounded to 2 decimal places)
-for country, (pop2020, pop2024) in population.items():
+
+for country in population:
+    pop2020 = population[country][0]
+    pop2024 = population[country][1]
+    
     change = (pop2024 - pop2020) / pop2020 * 100
     pop_change[country] = round(change, 2)
 
-# Print percentage change for each country
-print("=== Population Percentage Change by Country (2020-2024) ===")
-for country, change in pop_change.items():
-    print(f"{country}: {change}%")
-print("-" * 30)
-# Step 2: Sort and find countries with largest increase and decrease  
-# Convert dictionary to list and sort in descending order by percentage change (key=lambda x: x[1])
-sorted_pop_change = sorted(pop_change.items(), key=lambda x: x[1], reverse=True)
+# Step 3: print original results
+print("Population change (%):")
+for country in pop_change:
+    print(country, ":", pop_change[country], "%")
 
-# Print sorted results
-print("=== Population Percentage Change (Sorted from Largest to Smallest) ===")
-for country, change in sorted_pop_change:
-    print(f"{country}: {change}%")
+print()
 
-# Find countries with the largest increase and largest decrease
-largest_increase = sorted_pop_change[0]  # First after sorting: largest increase
-largest_decrease = sorted_pop_change[-1] # Last after sorting: largest decrease
+# Step 4: sort from largest to smallest
+sorted_list = sorted(pop_change.items(), key=lambda x: x[1], reverse=True)
 
-# Print result statements
-print(f"\nCountry with the largest population increase: {largest_increase[0]} ({largest_increase[1]}%)")
-print(f"Country with the largest population decrease: {largest_decrease[0]} ({largest_decrease[1]}%)")
-print("-" * 30)
+print("Sorted population change (%):")
+for country, change in sorted_list:
+    print(country, ":", change, "%")
 
-# Step 3: Plot population change bar chart  
-import os  # New import
+print()
 
-# Extract sorted x-axis (countries) and y-axis (percentage change)
-sorted_countries = [x[0] for x in sorted_pop_change]
-sorted_changes = [x[1] for x in sorted_pop_change]
+# Step 5: find largest increase and decrease
+largest_increase = sorted_list[0]
+largest_decrease = sorted_list[-1]
 
-# Set colors: positive values = blue, negative values = red
-colors = ['blue' if c > 0 else 'red' for c in sorted_changes]
+print("Largest increase:", largest_increase[0], largest_increase[1], "%")
+print("Largest decrease:", largest_decrease[0], largest_decrease[1], "%")
 
-# Create figure
-plt.figure(figsize=(9, 6))
-# Plot bar chart
-plt.bar(sorted_countries, sorted_changes, color=colors, edgecolor='black')
+print()
 
-# Add labels (well-labelled)
-plt.title('Population Percentage Change (2020-2024) by Country', fontsize=14)
-plt.xlabel('Country', fontsize=12)
-plt.ylabel('Population Percentage Change (%)', fontsize=12)
-# Add horizontal zero line (highlight growth / decrease)
-plt.axhline(y=0, color='black', linestyle='-', linewidth=0.8)
-# Display value labels
-for x, y in zip(sorted_countries, sorted_changes):
-    plt.text(x, y + 0.1 if y > 0 else y - 0.3, f'{y}%', ha='center', fontsize=10)
+# Step 6: prepare data for plotting
+countries = []
+changes = []
 
-# Automatically create folder and save the figure
-os.makedirs('Practical 5', exist_ok=True)
-plt.savefig('Practical 5/population_change_bar.png', dpi=300, bbox_inches='tight')
-# Show the plot
+for item in sorted_list:
+    countries.append(item[0])
+    changes.append(item[1])
+
+# Step 7: plot bar chart
+plt.figure(figsize=(8, 5))
+plt.bar(countries, changes)
+
+plt.title("Population Change (2020-2024)")
+plt.xlabel("Country")
+plt.ylabel("Change (%)")
+
+# add value labels
+for i in range(len(countries)):
+    plt.text(countries[i], changes[i], round(changes[i], 2), ha="center")
+
+# add zero line
+plt.axhline(0)
+
 plt.show()

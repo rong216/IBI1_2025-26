@@ -1,0 +1,8 @@
+Question:
+What was the distribution of DALYs across all countries in 2019?
+
+Line number in dalys.py:
+89
+
+Discussion:
+I used a histogram and simple summary statistics to examine how DALYs were distributed across countries in 2019. The plot helps show whether most countries are concentrated in a lower range or whether the disease burden is spread evenly. A skewed distribution would suggest that the burden of disease is uneven across countries, with some countries experiencing much higher DALYs than others.

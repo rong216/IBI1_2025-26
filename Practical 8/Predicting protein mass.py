@@ -1,4 +1,11 @@
-# Protein mass predictor
+# Practical 8 - Predicting protein mass.py
+# Pseudocode:
+# 1. Store the masses of the 20 amino acids in a dictionary
+# 2. Define a function that takes a protein sequence
+# 3. Check whether each amino acid is valid
+# 4. Add the masses together
+# 5. Return the total protein mass
+# 6. Include an example function call
 
 amino_acid_masses = {
     "G": 57.02,
@@ -23,24 +30,26 @@ amino_acid_masses = {
     "W": 186.08
 }
 
+
 def calculate_protein_mass(sequence):
-    sequence = sequence.upper()
+    sequence = sequence.upper().strip()
     total_mass = 0
 
     for amino_acid in sequence:
         if amino_acid in amino_acid_masses:
             total_mass += amino_acid_masses[amino_acid]
         else:
-            print("Error: undefined amino acid =", amino_acid)
+            print(f"Error: undefined amino acid = {amino_acid}")
             return None
 
     return total_mass
 
 
-# example of function call with user input
-user_sequence = input("Please enter an amino acid sequence: ")
-result = calculate_protein_mass(user_sequence)
+if __name__ == "__main__":
+    # Example function call
+    user_sequence = input("Please enter an amino acid sequence: ")
+    result = calculate_protein_mass(user_sequence)
 
-if result is not None:
-    print("Sequence:", user_sequence.upper())
-    print("Total protein mass:", result, "amu")
+    if result is not None:
+        print(f"Sequence: {user_sequence.upper()}")
+        print(f"Total protein mass: {result:.2f} amu")

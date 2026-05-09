@@ -1,5 +1,19 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
+
+# Practical 9 - SIR.py
+# Pseudocode:
+# 1. Define the population size and model parameters
+# 2. Start with one infected person and the rest susceptible
+# 3. For each time point:
+#    - Calculate the infection probability
+#    - Randomly infect susceptible people
+#    - Randomly recover infected people
+#    - Update S, I, and R
+#    - Store the results
+# 4. Plot susceptible, infected, and recovered over time
+# 5. Save the plot to a file
 
 # --------------------------
 # Basic parameters
@@ -23,15 +37,12 @@ recovered_history = [R]
 # Time course simulation
 # --------------------------
 for _ in range(time_points):
-    # Infection probability depends on:
-    # beta * proportion of infected people
+    # Infection probability depends on beta and the proportion of infected people
     infection_prob = beta * (I / N)
     infection_prob = min(max(infection_prob, 0), 1)
 
-    # Randomly decide how many susceptible people get infected
+    # Randomly determine new infections and recoveries
     new_infections = np.random.binomial(S, infection_prob)
-
-    # Randomly decide how many infected people recover
     new_recoveries = np.random.binomial(I, gamma)
 
     # Update counts
@@ -39,7 +50,7 @@ for _ in range(time_points):
     I += new_infections - new_recoveries
     R += new_recoveries
 
-    # Store updated values
+    # Store results
     susceptible_history.append(S)
     infected_history.append(I)
     recovered_history.append(R)
@@ -47,17 +58,19 @@ for _ in range(time_points):
 # --------------------------
 # Plot results
 # --------------------------
-plt.figure(figsize=(6, 4), dpi=150)
-plt.plot(susceptible_history, label="susceptible")
-plt.plot(infected_history, label="infected")
-plt.plot(recovered_history, label="recovered")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+output_plot = os.path.join(script_dir, "SIR_plot.png")
 
-plt.xlabel("time")
-plt.ylabel("number of people")
-plt.title("SIR model")
+plt.figure(figsize=(6, 4), dpi=150)
+plt.plot(susceptible_history, label="Susceptible")
+plt.plot(infected_history, label="Infected")
+plt.plot(recovered_history, label="Recovered")
+
+plt.xlabel("Time")
+plt.ylabel("Number of people")
+plt.title("Basic SIR Model")
 plt.legend()
 plt.tight_layout()
 
-# Optional save
-plt.savefig("SIR_plot.png")
+plt.savefig(output_plot, dpi=300)
 plt.show()

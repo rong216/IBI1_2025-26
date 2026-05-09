@@ -1,5 +1,20 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
+
+# Practical 9 - spatial_SIR.py
+# Pseudocode:
+# 1. Create a 100 x 100 grid of susceptible individuals
+# 2. Randomly select one individual to be infected
+# 3. For each time point:
+#    - Find all infected cells
+#    - For each infected cell, check its 8 neighbours
+#    - Infect susceptible neighbours with probability beta
+#    - Allow infected cells to recover with probability gamma
+#    - Update the grid
+#    - Save selected snapshots
+# 4. Plot snapshots at different time points
+# 5. Save the figure to a file
 
 # --------------------------
 # Basic parameters
@@ -22,16 +37,9 @@ population[outbreak[0], outbreak[1]] = 1
 # Save snapshots for plotting
 snapshots = {0: population.copy()}
 
-# --------------------------------------------------
-# PSEUDOCODE
-# 1. Find all currently infected cells
-# 2. For each infected cell:
-#    - Check its 8 neighbours
-#    - If a neighbour is susceptible, infect it with probability beta
-#    - Allow the infected cell to recover with probability gamma
-# 3. Update the grid
-# 4. Save selected time points for plotting
-# --------------------------------------------------
+# --------------------------
+# Time course simulation
+# --------------------------
 for t in range(1, time_points + 1):
     next_population = population.copy()
 
@@ -50,7 +58,7 @@ for t in range(1, time_points + 1):
 
                 # Stay inside the grid
                 if 0 <= nr < grid_size and 0 <= nc < grid_size:
-                    # Only susceptible neighbours can be infected
+                    # Infect only susceptible neighbours
                     if population[nr, nc] == 0:
                         if np.random.random() < beta:
                             next_population[nr, nc] = 1
@@ -67,17 +75,26 @@ for t in range(1, time_points + 1):
 # --------------------------
 # Plot snapshots
 # --------------------------
-times_to_plot = [0, 10, 50, 100]
+script_dir = os.path.dirname(os.path.abspath(__file__))
+output_plot = os.path.join(script_dir, "spatial_SIR_plot.png")
 
+times_to_plot = [0, 10, 50, 100]
 fig, axes = plt.subplots(2, 2, figsize=(8, 8), dpi=150)
 
 for ax, t in zip(axes.flatten(), times_to_plot):
-    ax.imshow(snapshots[t], cmap="viridis", interpolation="nearest", vmin=0, vmax=2)
-    ax.set_title(f"time = {t}")
+    ax.imshow(
+        snapshots[t],
+        cmap="viridis",
+        interpolation="nearest",
+        vmin=0,
+        vmax=2
+    )
+    ax.set_title(f"Time = {t}")
     ax.set_xticks([])
     ax.set_yticks([])
 
-plt.suptitle("Spatial SIR model")
+plt.suptitle("Spatial SIR Model\n0 = Susceptible, 1 = Infected, 2 = Recovered")
 plt.tight_layout()
-plt.savefig("spatial_SIR_plot.png")
+
+plt.savefig(output_plot, dpi=300)
 plt.show()

@@ -2,13 +2,13 @@ Dear all,
 
 I am writing to describe how I responded to the formative feedback for Weeks 3, 4 and 5.
 
-For Week 3, I lost marks because my commit messages were repetitive. Although they gave some useful information by listing the files added, they did not clearly describe the specific change made to each file. In response to this feedback, I have changed how I write my GitHub commit messages. I will now write commit messages that describe the actual change made, for example explaining that I edited Introduction.txt, added Reflection.txt, or updated the practical files, rather than only listing filenames.
+For Week 3, I lost marks because my commit messages were repetitive. Although they gave some useful information by listing the files added, they did not clearly describe the specific change made to each file. In response to this feedback, I have changed how I write my GitHub commit messages. I will now write commit messages that describe the actual change made, for example explaining that I edited Introductions.txt, added Reflection.txt, or updated the practical files, rather than only listing filenames.
 
 No Python scripts needed to be edited for Week 3 because the feedback was about my GitHub workflow and commit message style rather than the code itself.
 
 For Week 4, I scored 100%. The scripts variables.py, infection.py, mystery_code.py and creatinine_clearance.py met the requirements, so I did not need to edit these files in response to the feedback.
 
-For Week 5, I also scored 100%. The scripts for gene expression, heart rates and population growth met the requirements, so I did not need to edit these files in response to the feedback.
+For Week 5, I also scored 100%. The scripts for gene expression, heart rates and population growth met the requirements, so I did not need to edit these files in response to the feedback. A Practical 5 file was included in one of my recent pushes while I was organising my repository, but this was not because Practical 5 needed correction. The Week 5 work had already met the feedback requirements.
 
 Overall, my total mark was 94.8718%. I have read the feedback and the main change I made was to improve my commit message style so that future commits describe the specific changes made more clearly.
 

@@ -1,0 +1,23 @@
+Sequence lengths:
+Human: 289
+Mouse: 289
+Random: 289
+
+human-mouse
+Identical amino acids: 279
+Percentage identity: 96.54 %
+BLOSUM62 score: 1490
+Average BLOSUM62 score per amino acid: 5.16
+
+human-random
+Identical amino acids: 20
+Percentage identity: 6.92 %
+BLOSUM62 score: -246
+Average BLOSUM62 score per amino acid: -0.85
+
+mouse-random
+Identical amino acids: 19
+Percentage identity: 6.57 %
+BLOSUM62 score: -251
+Average BLOSUM62 score per amino acid: -0.87
+

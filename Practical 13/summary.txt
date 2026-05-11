@@ -1,0 +1,19 @@
+Practical 13 Summary
+
+In this practical, I compared the amino acid sequence of human DLX5 with mouse DLX5 and with a random protein sequence of the same length. The aim was to understand sequence comparison using both online BLAST and a simple Python implementation of a non-gapped global alignment.
+
+The human DLX5 protein sequence used in this analysis was 289 amino acids long. Its subcellular location is the nucleus. In the online UniProt BLAST search, the search was restricted to Eutheria (placentals). The BLAST search returned 250 hits. The range of percentage identities in the reported BLAST results was 83.2% to 100%. The best alignment with mouse DLX5, UniProt ID P70396, had 279 identical amino acids out of 289, giving 97% identity. The alignment had no gaps.
+
+For the Python analysis, I compared three pairs of sequences: human-mouse, human-random, and mouse-random. All three sequences were 289 amino acids long. The Python program calculated both the percentage identity and the BLOSUM62 alignment score for each pair.
+
+The human-mouse comparison had 279 identical amino acids, giving a percentage identity of 96.54%. This pair also had a high positive BLOSUM62 score of 1490, with an average score of 5.16 per amino acid.
+
+The human-random comparison had only 20 identical amino acids, giving a percentage identity of 6.92%. Its BLOSUM62 score was -246, with an average score of -0.85 per amino acid.
+
+The mouse-random comparison had 19 identical amino acids, giving a percentage identity of 6.57%. Its BLOSUM62 score was -251, with an average score of -0.87 per amino acid.
+
+These results show that human DLX5 and mouse DLX5 are much more similar to each other than either sequence is to the random sequence. This is shown by both the high percentage identity and the high positive BLOSUM62 score for the human-mouse comparison. In contrast, the comparisons with the random sequence had very low percentage identities and negative BLOSUM62 scores, suggesting little meaningful sequence similarity.
+
+Therefore, the two most closely related sequences are human DLX5 and mouse DLX5.
+
+In the UniProt BLAST alignment view, blue highlighted residues indicate positions where the query and hit residues match or are similar, while grey/white positions indicate mismatches or less strongly conserved positions.
